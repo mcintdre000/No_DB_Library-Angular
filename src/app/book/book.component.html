@@ -22,6 +22,23 @@
     <li>{{book.title}}</li>
     <li>{{book.author}}</li>
     <img [src]="book.cover" alt="book cover">
+    <div>
+        <span>Read:</span>
+        <input 
+          class="checkInput" 
+          type="checkbox" 
+          (click)='updateBook(book.id)'
+          [checked]='true'
+          *ngIf="book.read"
+        >
+        <input 
+          class="checkInput" 
+          type="checkbox" 
+          (click)='updateBook(book.id)'
+          [checked]='false'
+          *ngIf="!book.read"
+        >
+        </div>
     <app-delete-book (bookId)="deleteBook($event)" [book]="book">Delete</app-delete-book>
   </ul>
 

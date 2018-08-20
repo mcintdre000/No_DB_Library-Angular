@@ -54,8 +54,14 @@ export class BookComponent implements OnInit {
   ));
   }
 
+  updateBook(id) {
+    const editIndex = this.books.findIndex( e => e.id == id );
+    this.books[editIndex].read = !this.books[editIndex].read;
+    // console.log(this.books[editIndex].read)
+  }
+
   deleteBook(event: number): void {
-    console.log(event)
+    // console.log(event)
     let bookIndex = this.books.findIndex( e => e.id == event );
     this.books.splice( bookIndex, 1 );
   }
