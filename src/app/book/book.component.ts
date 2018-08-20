@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { Book } from '../books.model';
+import { NgForm } from '../../../node_modules/@angular/forms';
 
 @Component({
   selector: 'app-book',
@@ -8,7 +9,7 @@ import { Book } from '../books.model';
   encapsulation: ViewEncapsulation.None
 })
 export class BookComponent implements OnInit {
-  books: Book[] = [
+  public books: Book[] = [
     new Book(
       1,
       'Carl Jung',
@@ -31,16 +32,44 @@ export class BookComponent implements OnInit {
       true
     )
   ];
+  public author: string = '';
+  public title: string = '';
+  public cover: string = '';
+  public read: boolean = false;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  deleteBook(event) {
+  addBook() {
+    // console.log(f)
+    console.log('hit')
+    this.books.push( new Book(
+      this.books.length + 1,
+      this.author,
+      this.title,
+      this.cover,
+      this.read
+  ));
+  }
+
+  deleteBook(event: number): void {
     console.log(event)
     let bookIndex = this.books.findIndex( e => e.id == event );
     this.books.splice( bookIndex, 1 );
+  }
+
+  onUpdateBook(event: Event) {
+    this.title = (<HTMLInputElement>event.target).value;
+    // this.author = (<HTMLInputElement>event.target).value;
+    // this.cover = (<HTMLInputElement>event.target).value;
+  }
+  onUpdateAuthor(event: Event) {
+    this.author = (<HTMLInputElement>event.target).value;
+  }
+  onUpdateCover(event: Event) {
+    this.cover = (<HTMLInputElement>event.target).value;
   }
 
 }

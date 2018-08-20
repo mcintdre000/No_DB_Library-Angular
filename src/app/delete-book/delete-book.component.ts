@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Book } from '../books.model';
 
 @Component({
   selector: 'app-delete-book',
@@ -6,15 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./delete-book.component.css']
 })
 export class DeleteBookComponent implements OnInit {
-
+  @Input() book: Book
+  @Output() bookId = new EventEmitter<number>();
   constructor() { }
 
   ngOnInit() {
   }
 
-  // deleteBook(event) {
-  //   let bookIndex = $scope.books.findIndex( e => e.id == deleteID );
-  //   books.splice( bookIndex, 1 );
-  // }
+  passId() {
+    this.bookId.emit(this.book.id)
+  }
 
 }

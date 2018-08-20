@@ -1,9 +1,28 @@
+<div class="add-book">
+  <input 
+    type="text"
+    placeholder="Title"
+    [(ngModel)]="title"
+  >
+  <input 
+    type="text"
+    placeholder="Author"
+    [(ngModel)]="author"
+  >
+  <input 
+    type="text"
+    placeholder="Cover URL"
+    [(ngModel)]="cover"
+  >
+  <button class="addBtn" (click)="addBook()">Add Book</button>
+
+</div>
 <div *ngFor="let book of books"class="Books">
   <ul>
     <li>{{book.title}}</li>
     <li>{{book.author}}</li>
     <img [src]="book.cover" alt="book cover">
-    <button (click)="deleteBook(book.id)">Delete</button>
+    <app-delete-book (bookId)="deleteBook($event)" [book]="book">Delete</app-delete-book>
   </ul>
 
 </div> 
